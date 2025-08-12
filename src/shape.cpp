@@ -1,7 +1,7 @@
 #include "../include/tetris.hpp"
 
 Shape::Shape() {
-    // generate random shape as constructor
+    // 构造函数生成随机形状
 
     random_device rd; 
     mt19937 eng(rd()); 
@@ -14,10 +14,10 @@ Shape::Shape() {
 
 
 void Shape::generate(vector<vector<string> > window) {
-    // moves the next random state to the current state
-    // and generates the next random state
+    // 将下一个随机状态转移到当前状态
+// 并生成新的随机状态
     
-    // fix death state
+    // 修复死亡状态
     dead = false;
     // move old data to new spot
     shapetype[0] = shapetype[1];
@@ -26,7 +26,7 @@ void Shape::generate(vector<vector<string> > window) {
     int rand = randNum(1, 7);
 
     while ( rand == shapetype[0] )
-        // avoid repeating shapes
+        // 避免重复形状
         rand = randNum(1, 7);
 
     shapetype[1] = rand;
@@ -182,7 +182,7 @@ void Shape::drop() {
 
 
 void Shape::rotate() { 
-    // rotates the 'selected' shape array counterclockwise if possible
+    // 如果可能，将'selected'形状数组逆时针旋转
 
     vector<vector<bool> > temp;
 
@@ -198,10 +198,10 @@ void Shape::rotate() {
 
     for (count = 0; count < selected.size(); count++) {
         for (count2 = 0; count2 < selected[0].size(); count2++) {
-            // counter-clockwise rotation
+            // 逆时针旋转
             temp[temp.size() - count2 - 1][count] = selected[count][count2];
             
-            // clockwise rotation
+            // 顺时针旋转
             // temp[count2][temp[0].size() - count - 1] = selected[count][count2];
         }
     }
@@ -217,7 +217,7 @@ void Shape::rotate() {
     if ( rotate )
         selected = temp;
 
-    // resetting shapeHeight variable
+    // 重置形状高度变量
     shapeHeight = 0;
     for ( int row = 0; row < selected.size(); row++ ) {
         bool found = false;

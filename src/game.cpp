@@ -1,9 +1,9 @@
 #include "../include/tetris.hpp"
 
 void game(Shape shape, Screen screen, int startLevel, bool easy, string basename) { 
-    // the main gameloop
+    // 主游戏循环
     
-    // general game constants 
+    // 通用游戏常量 
     int frameRate = 24;
     frameRate -= startLevel;
 
@@ -11,14 +11,14 @@ void game(Shape shape, Screen screen, int startLevel, bool easy, string basename
     int count = 0;
     unsigned int microseconds = 10000;
     
-    // in case the terminal doesnt support invis cursor
+    // 如果终端不支持隐藏光标
     int restingCursor[2] = { 23, 22 };
 
 
     while (!shape.gameover) {
 
         if ( screen.advancingLevel ) { 
-           // change the colors for the level
+           // 改变关卡颜色
             if ( frameRate > 2 ) {
                 frameRate--;
             }
@@ -27,7 +27,7 @@ void game(Shape shape, Screen screen, int startLevel, bool easy, string basename
         }
 
         if ( newShape ) {
-            // if we need to generate a new shape, do so;
+            // 如果需要生成新形状
             // begin dropping the new shape, so
             // we no longer need a new shape.
             shape.generate(screen.window);
@@ -41,11 +41,11 @@ void game(Shape shape, Screen screen, int startLevel, bool easy, string basename
             newShape = false;
         }
         else if ( (count + 1) % frameRate == 0 ) {
-            // see if shape cannot fall anymore
+            // 检查形状是否无法继续下落
             shape.checkDeath();
         }
         else if ( count % frameRate == 0) {
-            // if the shape is still dropping
+            // 如果形状仍在下降
             if (shape.isdropping > 0) {
                 // if the shape is high enough that we need to 
                 // keep dropping it, do so without worrying about user input
@@ -63,19 +63,19 @@ void game(Shape shape, Screen screen, int startLevel, bool easy, string basename
             }
         }
 
-        // sleep (for a fraction of a block drop) 
+        // 休眠(用于方块下落间隔) 
         // in order to allow moving during frame        
         usleep(microseconds);
 
 
-        // Get keyinput for if user has input in the fraction of frame
-        // Perform actions based on keycode
+        // 获取用户在当前帧内的按键输入
+        // 根据按键执行操作
         int ch = getch();
         bool ground = false;
         bool breake = false;
 
         if ( ch ) {
-            // handle different moves
+            // 处理不同移动操作
             if ( ch == KEY_UP) {
                 shape.rotate();
             }
@@ -101,12 +101,12 @@ void game(Shape shape, Screen screen, int startLevel, bool easy, string basename
             }
         }
 
-        // hard drop the shape
+        // 硬降形状
         if ( ground ) {
             shape.ground(frameRate);
         }
 
-        // take the game to the death screen
+        // 进入游戏结束画面
         if ( breake ) {
             break;
         }
@@ -134,11 +134,11 @@ void game(Shape shape, Screen screen, int startLevel, bool easy, string basename
         }
     }
     
-    // wait for keyinput
+    // 等待按键输入
     nodelay(stdscr, FALSE);
     wrefresh(stdscr);
 
-    // print the death screen
+    // 打印游戏结束画面
     for ( int i = 8; i < 12; i++  ) {
         for ( int j = 3; j < 23; j++ ) {
             mvprintw(i,j," ");

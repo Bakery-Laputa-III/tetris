@@ -1,34 +1,34 @@
-# tetris
-My ascii/cli rendition of tetris.
+# 俄罗斯方块
+我的ASCII/CLI版俄罗斯方块实现。
 
 <img src=docs/out.gif width=500px>
 
-## Installation
+## 安装
 
-### Source
-If on linux, install `libncursesw5-dev` as dependency.
+### 源码安装
+Linux系统需要先安装依赖`libncursesw5-dev`。
 
 ```bash
 git clone 'https://github.com/k-vernooy/tetris' && cd tetris
 make
 sudo make install
 ```
-### Homebrew
+### Homebrew安装
 ```bash
 brew tap k-vernooy/tap
 brew install tetris
 ```
 
-## Usage 
+## 使用方法 
 
-To begin the game, simply type `tetris` in the terminal. Levels can be specified by the flag `--start-level x` (where x is a number 1-25). The ghost block can be turned on from the command line as well, with `--easy`.
+启动游戏只需在终端输入`tetris`。可通过`--start-level x`指定起始关卡(x为1-25的数字)。使用`--easy`参数可开启幽灵方块功能。
 
-### Control:
-Use the arrow keys to control the falling blocks:  
-- <kbd>e</kbd> to enable/disable the ghost block
-- <kbd>↑</kbd> to rotate the falling block
-- <kbd>→</kbd> to move right
-- <kbd>←</kbd> to move left
-- <kbd>↓</kbd> to soft drop. There are known bugs with soft dropping that will be fixed relatively soon. If the program is segfaulting for you, this is likely why.
-- <kbd>SPACE</kbd> to hard drop
-- <kbd>CTRL</kbd>+<kbd>C</kbd> at any time to quit the game
+### 操作控制:
+使用方向键控制下落方块:  
+- <kbd>e</kbd> 开启/关闭幽灵方块
+- <kbd>↑</kbd> 旋转下落方块
+- <kbd>→</kbd> 向右移动
+- <kbd>←</kbd> 向左移动
+- <kbd>↓</kbd> 软降。当前软降功能存在已知bug，将在后续版本修复。如果程序出现段错误，很可能是这个原因。
+- <kbd>空格</kbd> 硬降
+- 随时按<kbd>CTRL</kbd>+<kbd>C</kbd>退出游戏

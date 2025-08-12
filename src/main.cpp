@@ -4,7 +4,7 @@ using namespace std;
 
 int main(int argc, char ** argv) {
 
-    // curses window setup
+    // curses窗口设置
     setlocale(LC_CTYPE, "");
     initscr();
     noecho();
@@ -14,7 +14,7 @@ int main(int argc, char ** argv) {
 	start_color();
     use_default_colors();
 
-    // set and modify user settings
+    // 设置和修改用户配置
     int startLevel = 8;
     bool easy = false;
 
@@ -25,17 +25,17 @@ int main(int argc, char ** argv) {
             easy = true;
     }
 
-    // initialize screen and shape
+    // 初始化屏幕和形状
     Screen screen(startLevel);
     Shape shape;
     
-    // record how the user is calling the program
+    // 记录用户如何调用程序
     string basename = argv[0];
     
-    // call mainloop
+    // 调用主循环
     game(shape, screen, startLevel, easy, basename);
 
-    // curses cleanup
+    // curses清理
     endwin();
     return 0;
 }

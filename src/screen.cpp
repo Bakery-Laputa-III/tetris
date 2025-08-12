@@ -1,7 +1,7 @@
 #include "../include/tetris.hpp"
 
 Screen::Screen(int startLevel) {
-    // moves the screen string into a screen array
+    // 将屏幕字符串转换为屏幕数组
     startLevel = startLevel;
     level = startLevel;
 
@@ -25,13 +25,13 @@ Screen::Screen(int startLevel) {
 }
 
 void Screen::top() {
-    // print the first of the screen line to cover up shape
+    // 打印屏幕首行以覆盖形状
     move(0,0);
     printw(readLine(screenstr, 0).c_str());
 }
 
 void Screen::draw() {
-    // loop through the window and print it
+    // 遍历窗口并打印
     for ( int i = 0; i < window.size(); i++ ) {
         for ( int j = 0; j < window[i].size(); j++) {
 
@@ -39,8 +39,8 @@ void Screen::draw() {
 
             if ( (( i >= 1 && i < 19 ) && ( j > 4 && j < 25)) || ( ( i >= 3 && i < 6 ) && ( j > 33 && j < 43) )) {
 
-                // we're inside a game window, so we must 
-                // check for integer print keys
+                // 处于游戏窗口内
+// 需要检查整数打印键
 
                 if ( cur != " ") {
                     int colorNum;
@@ -80,7 +80,7 @@ void Screen::draw() {
 }
 
 void Screen::addNext(vector<vector<bool> > shape, vector<int> colors) {
-    // adds the shape that is next up to the mini window
+    // 将下一个形状添加到小窗口
     
     // default positions for the window
     int x = 34;
@@ -105,7 +105,7 @@ void Screen::addNext(vector<vector<bool> > shape, vector<int> colors) {
 }
 
 void Screen::updateIntDisplays(int score, int x, int y) {
-    // writes score to the mini window
+    // 将分数写入小窗口
 
     window[x][y] = to_string(score);
 
@@ -118,7 +118,7 @@ void Screen::updateIntDisplays(int score, int x, int y) {
 }
 
 void Screen::addShape(Shape shape) {
-    // add a shape object to the screen upon death
+    // 游戏结束时将形状对象添加到屏幕
     // to be stored in the screen object
     for ( int i = 0; i < shape.selected.size(); i++ ) {
         for ( int x = 0; x < shape.selected[i].size(); x++ ) {
@@ -131,8 +131,8 @@ void Screen::addShape(Shape shape) {
 }
 
 bool Screen::points() {
-    // performs point management like adding points to score
-    // and returns whether or not to advance to the next level
+    // 分数管理
+// 返回是否进入下一关
 
     // add lines gained this round to line score
     vector<int> fullLines = pointCheck();    
@@ -175,7 +175,7 @@ bool Screen::points() {
 }
 
 void Screen::advanceLevel() {
-    // level up the game
+    // 游戏升级
     level++;
     advancingLevel = true; // in order to reduce framerate in mainloop
 

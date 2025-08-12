@@ -4,20 +4,20 @@
 using namespace std;
 
 void checkNext(int startLevel, bool easy, string basename) {
-    // reads user input for a (y/n) input,
-    // restarts game or quits based on input
+    // 读取用户(y/n)输入
+// 根据输入重启游戏或退出
 
     int ch = getch();
     
-    // create a string with cli options
-    // for calling the program again
+    // 创建包含CLI选项的字符串
+// 用于再次调用程序
     string systring = basename;
     systring += " --start-level ";
     systring += to_string(startLevel);
     if (easy)
         systring += " --easy";
     
-    // perform action based on input
+    // 根据输入执行操作
     if ( ch == 'y' ) {
         // call binary
         if (system(systring.c_str()) == -1) {
@@ -33,7 +33,7 @@ void checkNext(int startLevel, bool easy, string basename) {
 }
 
 string readLine(string str, int n) {
-    // returns the nth line of a string
+    // 返回字符串的第n行
     stringstream f(str);
     string s;
     
@@ -46,18 +46,18 @@ string readLine(string str, int n) {
 }
 
 bool isNumber(const string& str) {
-    // returns whether the input string is a number
+    // 判断输入字符串是否为数字
     string::const_iterator it = str.begin();
     while (it != str.end() && isdigit(*it))
         ++it;
 
-    // if iterator got to the end of the string 
-    // and string is not empty, return true
+    // 如果迭代器到达字符串末尾
+// 且字符串不为空，返回true
     return !str.empty() && it == str.end();
 }
 
 int randNum(int start, int end) {
-    // returns random number between start and end
+    // 返回start和end之间的随机数
     random_device rd; 
     mt19937 eng(rd()); 
     uniform_int_distribution<> distr(start, end);

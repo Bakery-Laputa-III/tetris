@@ -1,6 +1,6 @@
 .PHONY: clean setup
 
-CXX := g++
+CXX := clang++
 BIN := bin
 BUILD := build
 STDV := -std=c++11

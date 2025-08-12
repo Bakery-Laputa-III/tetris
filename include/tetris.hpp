@@ -1,7 +1,6 @@
-// the tetris header
+// 俄罗斯方块头文件
 
-// including an unreasonable 
-// amount of libraries:
+// 包含大量库文件:
 #include <iostream>
 #include <vector>
 #include <string>
@@ -20,29 +19,29 @@
 
 using namespace std;
 
-// function declarations
+// 函数声明
 string readLine(string str, int n);
 bool isNumber(const string& s);
 void checkNext(int startLevel, bool easy, string basename);
 int randNum(int start, int end);
 
-// declaring classes for the shape and screen
+// 定义形状和屏幕类
 class Shape {
-    public: //! should probably make better use of encapsulation
-        Shape(); // blank constructor
+    public: //! 可能需要更好地使用封装
+        Shape(); // 空构造函数
 
-        // shape properties
-        int defaultPos[2]; // the default position of a shape
-        int trCoord[2]; // the current top right coordinate of the shape
+        // 形状属性
+        int defaultPos[2]; // 形状的默认位置
+        int trCoord[2]; // 形状当前右上角坐标
         int shapeHeight = 0;
 
-        vector<vector<bool> > selected; // the current selected shape
-        vector<vector<bool> > nextUp; // the next shape
+        vector<vector<bool> > selected; // 当前选中的形状
+        vector<vector<bool> > nextUp; // 下一个形状
         
-        vector<int> chosenchars; // the chosen set of print keys
-        vector<int> nextchars;   // the next set of print keys
+        vector<int> chosenchars; // 选中的打印键集合
+        vector<int> nextchars;   // 下一组打印键
 
-        vector<vector<vector<bool> > > shapecoords = { // a vector of shapes
+        vector<vector<vector<bool> > > shapecoords = { // 形状向量
             {   // the 'o' block
                 {0,0,0,0},
                 {0,1,1,0},
@@ -88,7 +87,7 @@ class Shape {
             }
         };
 
-        vector<vector<int> > chars = { // keys for printing each shape
+        vector<vector<int> > chars = { // 每个形状的打印键
             {1, 2},
             {3, 4},
             {5, 6},
@@ -102,21 +101,21 @@ class Shape {
         
         // vector<int> colors = { COLOR_WHITE, COLOR_WHITE, COLOR_BLUE, COLOR_RED, COLOR_RED, COLOR_BLUE, COLOR_WHITE };
         vector<int> colors = { COLOR_YELLOW, COLOR_CYAN, COLOR_BLUE, COLOR_WHITE, COLOR_RED, COLOR_GREEN, COLOR_MAGENTA };
-        int color; // the chosen color in the array
+        int color; // 数组中选中的颜色
 
         int shapetype[2];
 
-        // game states
+        // 游戏状态
         bool gameover = false;
         bool cannotMove = false;
         bool dead = false;
         int shapeRotation = 1;
         int isdropping;
 
-        // create a new shape
+        // 创建新形状
         void generate(vector<vector<string> > window);
         
-        // methods for changing the shape positions
+        // 改变形状位置的方法
         void draw();
         void drop();
         void fall();
@@ -125,12 +124,12 @@ class Shape {
         void ground(int framerate);
         vector<int> charCoords(vector<vector<bool> > shape);
 
-        // methods for the ghost tile
+        // 幽灵方块方法
         void showGround();
         void groundDraw(int down);
         vector<int> groundCoords(vector<vector<bool> > shape, int down);
         
-        // updating game states
+        // 更新游戏状态
         void checkDeath();
 };
 
@@ -158,13 +157,13 @@ class Screen {
         vector<vector<string> > window; 
         vector<int> colors = { COLOR_YELLOW, COLOR_CYAN, COLOR_BLUE, COLOR_WHITE, COLOR_RED, COLOR_GREEN, COLOR_MAGENTA };
 
-        Screen(int startlevel); // constructor for generating an array and setting a start level
+        Screen(int startlevel); // 构造函数，生成数组并设置起始关卡
 
         // graphics methods for updating the screen
         void draw();
         void top();
         void updateIntDisplays(int score, int x, int y);
-        string getChar(int x, int y); // returns string at coordinates of screen
+        string getChar(int x, int y); // 返回屏幕坐标处的字符串
 
         void addStartLevel(int startlevel); // update level variables
         void advanceLevel(); // level up the game
